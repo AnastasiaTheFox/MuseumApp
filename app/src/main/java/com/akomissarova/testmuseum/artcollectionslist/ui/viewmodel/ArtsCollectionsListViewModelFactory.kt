@@ -1,8 +1,8 @@
-package com.akomissarova.testmuseum.ui
+package com.akomissarova.testmuseum.artcollectionslist.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.akomissarova.testmuseum.repository.ArtCollectionsRepository
+import com.akomissarova.testmuseum.artcollectionslist.repository.ArtCollectionsRepository
 
 class ArtsCollectionsListViewModelFactory(
     private val collectionsRepository: ArtCollectionsRepository

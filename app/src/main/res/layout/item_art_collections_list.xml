@@ -3,12 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="@dimen/default_padding">
 
     <TextView
-        android:id="@+id/collectionNameView"
+        android:id="@+id/collectionTitleView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/collectionAuthorView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_padding"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/collectionTitleView" />
+
+    <ImageView
+        android:id="@+id/collectionImage"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/collection_item_image_height"
+        android:layout_marginTop="@dimen/default_padding"
+        android:adjustViewBounds="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/collectionAuthorView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,17 +1,19 @@
-package com.akomissarova.testmuseum.ui
+package com.akomissarova.testmuseum.artcollectionslist.ui
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.akomissarova.testmuseum.R
-import com.akomissarova.testmuseum.domain.ArtCollectionsListItem
+import com.akomissarova.testmuseum.artcollectionslist.domain.ArtCollectionsListViewItem
+import com.bumptech.glide.Glide
 
 class ArtCollectionsListAdapter: RecyclerView.Adapter<CollectionsListItemViewHolder>() {
 
-    private val list: MutableList<ArtCollectionsListItem> = mutableListOf()
+    private val list: MutableList<ArtCollectionsListViewItem> = mutableListOf()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -25,12 +27,12 @@ class ArtCollectionsListAdapter: RecyclerView.Adapter<CollectionsListItemViewHol
         holder.bind(item)
     }
 
-    private fun getItem(position: Int): ArtCollectionsListItem = list[position]
+    private fun getItem(position: Int): ArtCollectionsListViewItem = list[position]
 
     override fun getItemCount(): Int = list.size
 
     @SuppressLint("NotifyDataSetChanged")
-    fun update(list: List<ArtCollectionsListItem>) {
+    fun update(list: List<ArtCollectionsListViewItem>) {
         this.list.apply {
             clear()
             addAll(list)
@@ -41,10 +43,16 @@ class ArtCollectionsListAdapter: RecyclerView.Adapter<CollectionsListItemViewHol
 
 class CollectionsListItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    private val name: TextView = itemView.findViewById(R.id.collectionNameView)
+    private val title: TextView = itemView.findViewById(R.id.collectionTitleView)
+    private val author: TextView = itemView.findViewById(R.id.collectionAuthorView)
+    private val image: ImageView = itemView.findViewById(R.id.collectionImage)
 
-    fun bind(item: ArtCollectionsListItem) {
-        name.text = item.name
+    fun bind(item: ArtCollectionsListViewItem) {
+        title.text = item.title
+        author.text = itemView.resources.getString(R.string.collection_author_name, item.author)
+        Glide.with(itemView.context)
+            .load(item.imageUrl)
+            .into(image)
     }
 
     companion object {
