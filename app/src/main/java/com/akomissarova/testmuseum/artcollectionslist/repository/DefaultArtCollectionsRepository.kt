@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import com.akomissarova.testmuseum.artcollectionslist.api.ArtCollectionsListApiService
 import com.akomissarova.testmuseum.artcollectionslist.api.asDomainList
 import com.akomissarova.testmuseum.artcollectionslist.domain.ArtCollectionsListLoadingState
-import com.akomissarova.testmuseum.artcollectionslist.domain.ArtCollectionsListViewItem
 
 class DefaultArtCollectionsRepository(private val apiServiceService: ArtCollectionsListApiService): ArtCollectionsRepository {
 
@@ -16,7 +15,7 @@ class DefaultArtCollectionsRepository(private val apiServiceService: ArtCollecti
         //ideally there should also be network state monitoring
         try {
             list.postValue(ArtCollectionsListLoadingState.Progress)
-            val collection = apiServiceService.getList()
+            val collection = apiServiceService.getNewestItemsList()
             if (collection.errorBody() == null) {
                 list.postValue(ArtCollectionsListLoadingState.Success(
                     collection.body()?.artList?.asDomainList() ?: listOf()

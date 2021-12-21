@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Museum</string>
+    <string name="app_name">Museum: latest jewellery items</string>
     <string name="collection_list_error">An error has occurred</string>
     <string name="collection_author_name">Author: %1$s</string>
 </resources>

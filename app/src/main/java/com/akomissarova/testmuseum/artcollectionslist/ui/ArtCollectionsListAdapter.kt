@@ -52,6 +52,7 @@ class CollectionsListItemViewHolder(itemView: View) : RecyclerView.ViewHolder(it
         author.text = itemView.resources.getString(R.string.collection_author_name, item.author)
         Glide.with(itemView.context)
             .load(item.imageUrl)
+            .placeholder(R.color.graphite_gray)
             .into(image)
     }
 

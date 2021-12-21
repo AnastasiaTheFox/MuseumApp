@@ -7,5 +7,9 @@ import retrofit2.http.Query
 interface ArtCollectionsListApiService {
 
     @GET("/api/en/collection")
-    suspend fun getList(@Query("type") type: String = "jewellery"): Response<ArtCollectionsList>
+    suspend fun getNewestItemsList(
+        @Query("type") type: String = "jewellery",
+        @Query("ps") itemsCount: Int = 30,
+        @Query("s") order: String = "achronologic"
+    ): Response<ArtCollectionsList>
 }

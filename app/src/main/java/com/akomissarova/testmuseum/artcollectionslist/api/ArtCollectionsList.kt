@@ -13,7 +13,7 @@ data class ArtCollectionsList(
 data class ArtItem(
     @field:Json(name = "id") val id: String,
     @field:Json(name = "title") val title: String,
-    @field:Json(name = "webImage") val webImage: WebImage,
+    @field:Json(name = "webImage") val webImage: WebImage?,
     @field:Json(name = "principalOrFirstMaker") val author: String
 )
 
@@ -25,5 +25,5 @@ data class WebImage(
 //possible improvement: using separate mapper classes
 public fun List<ArtItem>.asDomainList(): List<ArtCollectionsListViewItem> =
     map {
-        return@map ArtCollectionsListViewItem(it.title, it.author, it.webImage.url)
+        return@map ArtCollectionsListViewItem(it.title, it.author, it.webImage?.url)
     }.toList()
