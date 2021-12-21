@@ -3,6 +3,7 @@ package com.akomissarova.testmuseum.artcollectionslist.repository
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.akomissarova.testmuseum.artcollectionslist.api.ArtCollectionsListApiService
+import com.akomissarova.testmuseum.artcollectionslist.api.asDomainList
 import com.akomissarova.testmuseum.artcollectionslist.domain.ArtCollectionsListLoadingState
 import com.akomissarova.testmuseum.artcollectionslist.domain.ArtCollectionsListViewItem
 
@@ -16,11 +17,9 @@ class DefaultArtCollectionsRepository(private val apiServiceService: ArtCollecti
         try {
             list.postValue(ArtCollectionsListLoadingState.Progress)
             val collection = apiServiceService.getList()
-            if (collection.errorBody() == null && collection.body() != null) {
+            if (collection.errorBody() == null) {
                 list.postValue(ArtCollectionsListLoadingState.Success(
-                    collection.body()!!.artList.map {
-                        return@map ArtCollectionsListViewItem(it.title, it.author, it.webImage.url)
-                    }.toList()
+                    collection.body()?.artList?.asDomainList() ?: listOf()
                 ))
             } else {
                 list.postValue(ArtCollectionsListLoadingState.Error)

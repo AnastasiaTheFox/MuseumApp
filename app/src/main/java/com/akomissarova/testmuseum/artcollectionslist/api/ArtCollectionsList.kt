@@ -1,5 +1,6 @@
 package com.akomissarova.testmuseum.artcollectionslist.api
 
+import com.akomissarova.testmuseum.artcollectionslist.domain.ArtCollectionsListViewItem
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -20,3 +21,9 @@ data class ArtItem(
 data class WebImage(
     @field:Json(name = "url") val url: String
 )
+
+//possible improvement: using separate mapper classes
+public fun List<ArtItem>.asDomainList(): List<ArtCollectionsListViewItem> =
+    map {
+        return@map ArtCollectionsListViewItem(it.title, it.author, it.webImage.url)
+    }.toList()
