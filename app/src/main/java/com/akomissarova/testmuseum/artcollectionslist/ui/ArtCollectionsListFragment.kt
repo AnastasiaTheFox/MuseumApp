@@ -9,6 +9,8 @@ import androidx.cardview.widget.CardView
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.akomissarova.testmuseum.R
@@ -26,8 +28,7 @@ class ArtCollectionsListFragment : Fragment() {
 
     private val viewModelFactory: ArtsCollectionsListViewModelFactory by inject()
     private val adapter: ArtCollectionsListAdapter by inject()
-    private val viewModel: ArtCollectionsListViewModel = viewModelFactory.create(
-        ArtCollectionsListViewModel::class.java)
+    lateinit var viewModel: ArtCollectionsListViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var progress: ProgressBar
     private lateinit var errorView: CardView
@@ -51,7 +52,7 @@ class ArtCollectionsListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         //ideally needs to be reworked to newer callbacks
         super.onActivityCreated(savedInstanceState)
-
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ArtCollectionsListViewModel::class.java)
         viewModel.items.observe(viewLifecycleOwner, {
             when (it) {
                 is ArtCollectionsListLoadingState.Success -> {
