@@ -52,7 +52,7 @@ class ArtCollectionsListFragment : Fragment() {
         //ideally needs to be reworked to newer callbacks
         super.onActivityCreated(savedInstanceState)
 
-        viewModel.data.observe(viewLifecycleOwner, {
+        viewModel.items.observe(viewLifecycleOwner, {
             when (it) {
                 is ArtCollectionsListLoadingState.Success -> {
                     showSuccessState(it.result)

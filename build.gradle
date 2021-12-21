@@ -3,7 +3,8 @@ buildscript {
     ext.kotlin_version = "1.5.20"
     ext.koin_version = '3.1.4'
     ext.moshi_version = '1.12.0'
-    ext.room_version = '2.3.0'
+    ext.room_version = '2.4.0'
+    ext.mokk_version = '1.12.1'
     repositories {
         google()
         mavenCentral()
