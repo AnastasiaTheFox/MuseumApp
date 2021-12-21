@@ -22,6 +22,7 @@ android {
 
     buildTypes {
         debug {
+            //the api key needs to be in local.properties file
             buildConfigField("String", "MUSEUM_API_KEY", localProperties['MUSEUM_API_KEY'])
         }
         release {

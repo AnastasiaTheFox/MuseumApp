@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.akomissarova.testmuseum.R
 import com.akomissarova.testmuseum.artcollectionslist.domain.ArtCollectionsListLoadingState
+import com.akomissarova.testmuseum.artcollectionslist.domain.ArtCollectionsListViewItem
 import com.akomissarova.testmuseum.artcollectionslist.ui.viewmodel.ArtCollectionsListViewModel
 import com.akomissarova.testmuseum.artcollectionslist.ui.viewmodel.ArtsCollectionsListViewModelFactory
 import org.koin.android.ext.android.inject
@@ -48,13 +49,16 @@ class ArtCollectionsListFragment : Fragment() {
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
+        //ideally needs to be reworked to newer callbacks
         super.onActivityCreated(savedInstanceState)
-        showInitialState()
 
         viewModel.data.observe(viewLifecycleOwner, {
             when (it) {
                 is ArtCollectionsListLoadingState.Success -> {
-                    showSuccessState(it)
+                    showSuccessState(it.result)
+                }
+                is ArtCollectionsListLoadingState.Progress -> {
+                    showLoadingState()
                 }
                 else -> {
                     showErrorState()
@@ -63,14 +67,14 @@ class ArtCollectionsListFragment : Fragment() {
         })
     }
 
-    private fun showSuccessState(it: ArtCollectionsListLoadingState.Success) {
-        adapter.update(it.result)
+    private fun showSuccessState(list: List<ArtCollectionsListViewItem>) {
+        adapter.update(list)
         errorView.isGone = true
         recyclerView.isVisible = true
         progress.isGone = true
     }
 
-    private fun showInitialState() {
+    private fun showLoadingState() {
         recyclerView.isGone = true
         progress.isVisible = true
         errorView.isGone = true

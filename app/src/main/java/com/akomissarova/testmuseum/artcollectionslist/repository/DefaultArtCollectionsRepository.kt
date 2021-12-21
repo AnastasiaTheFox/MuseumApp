@@ -12,7 +12,9 @@ class DefaultArtCollectionsRepository(private val apiServiceService: ArtCollecti
         MutableLiveData<ArtCollectionsListLoadingState>()
 
     override suspend fun refreshList() {
+        //ideally there should also be network state monitoring
         try {
+            list.postValue(ArtCollectionsListLoadingState.Progress)
             val collection = apiServiceService.getList()
             if (collection.errorBody() == null && collection.body() != null) {
                 list.postValue(ArtCollectionsListLoadingState.Success(

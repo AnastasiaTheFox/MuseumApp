@@ -5,4 +5,5 @@ sealed class ArtCollectionsListLoadingState {
         ArtCollectionsListLoadingState()
 
     object Error : ArtCollectionsListLoadingState()
+    object Progress : ArtCollectionsListLoadingState()
 }
