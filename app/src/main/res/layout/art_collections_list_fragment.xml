@@ -16,14 +16,29 @@
         android:layout_height="wrap_content"
         android:visibility="gone">
 
-        <TextView
-            android:id="@+id/collectionsListErrorMessage"
-            style="@style/ErrorText"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/default_padding"
-            android:text="@string/collection_list_error" />
+            android:padding="@dimen/default_padding"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/collectionsListErrorMessage"
+                style="@style/ErrorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/collection_list_error" />
+
+            <ImageButton
+                android:id="@+id/collectionsListRefresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                style="@style/RefreshButton"
+                android:layout_marginTop="@dimen/default_padding"
+                android:src="@drawable/ic_refresh" />
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <ProgressBar

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ProgressBar
 import androidx.cardview.widget.CardView
 import androidx.core.view.isGone
@@ -32,6 +33,7 @@ class ArtCollectionsListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var progress: ProgressBar
     private lateinit var errorView: CardView
+    private lateinit var refresh: ImageButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,9 +46,14 @@ class ArtCollectionsListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         errorView = view.findViewById(R.id.collectionsListErrorView)
         progress = view.findViewById(R.id.collectionsListLoadingProgress)
+        refresh = view.findViewById(R.id.collectionsListRefresh)
         recyclerView = view.findViewById(R.id.collectionsList)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
         recyclerView.adapter = adapter
+
+        refresh.setOnClickListener {
+            viewModel.refresh()
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

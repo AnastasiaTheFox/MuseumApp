@@ -7,11 +7,16 @@ import com.akomissarova.testmuseum.artcollectionslist.domain.ArtCollectionsListL
 import com.akomissarova.testmuseum.artcollectionslist.repository.ArtCollectionsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeout
 
 class ArtCollectionsListViewModel(private val collectionsRepository: ArtCollectionsRepository) : ViewModel() {
     val items: MutableLiveData<ArtCollectionsListLoadingState> = MutableLiveData()
 
     init {
+        refresh()
+    }
+
+    fun refresh() {
         viewModelScope.launch(Dispatchers.IO) {
             items.postValue(ArtCollectionsListLoadingState.Progress)
             items.postValue(collectionsRepository.getUpdatedList())

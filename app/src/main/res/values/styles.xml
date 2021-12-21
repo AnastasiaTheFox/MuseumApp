@@ -23,6 +23,9 @@
         <item name="android:textSize">24sp</item>
     </style>
 
+    <style name="RefreshButton" parent="Widget.AppCompat.Button.Borderless">
+    </style>
+
     <color name="yellow">#FFD900</color>
     <color name="yellow_dark">#E9D81B</color>
 </resources>
